@@ -6,11 +6,16 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.12",
     "date-fns": "^2.29.3",
     "gray-matter": "^4.0.3",
     "next": "latest",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "recharts": "^2.4.3",
     "remark": "^14.0.2",
     "remark-html": "^15.0.1"
   },
