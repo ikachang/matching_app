@@ -20,6 +20,12 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import Avatar from '../components/AvatarTest'
 import TagSelect from '../components/TagSelect'
 
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import ListSubheader from '@mui/material/ListSubheader';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
 
 function Copyright(props: any) {
   return (
@@ -38,13 +44,16 @@ const drawerWidth: number = 240;
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
+  //?は、openがあってもなくてもいいよのオプションパラメータ
 }
 
 //styled(MuiAppBar,{})<型指定>(css)
+//コロンは、２種類ある。ほとんどが、CSSのコロン
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
   //<App...>は、styledの返す型を指定している。
 })<AppBarProps>(({ theme, open }) => ({
+  //zIndexは第三の軸を与える。つまりはlayerみたいなもんやろ。
   zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
@@ -99,23 +108,23 @@ function DashboardContent() {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}  sx={{ backgroundColor: "blue" }}>
+        <AppBar position="absolute" open={open} sx={{ backgroundColor: "blue" }}>
           <Toolbar //sxで色を変えられた。このToolBarは横一直線
-            sx={{ 
+            sx={{
               pr: '24px', // keep right padding when drawer closed
-              backgroundColor: "#7fffd4" 
+              backgroundColor: "#7fffd4"
             }}
           >
 
             <IconButton //Toolbar の中に、IconButtonが２つ（Badgeとメニューバー）
-                        //とTypographyの文字もある。
+              //とTypographyの文字もある。
               edge="start"
               color="inherit"
               aria-label="open drawer"
               onClick={toggleDrawer}
               sx={{
                 marginRight: '36px',
-              
+
                 ...(open && { display: 'none' }),
               }}
             >
@@ -124,11 +133,11 @@ function DashboardContent() {
 
 
             <Typography
-            //componentは指定すると便利らしい
-            //variantは実際のフォントの大きさ的的な
+              //componentは指定すると便利らしい
+              //variantは実際のフォントの大きさ的的な
               component="h1"
               variant="h6"
-              color="inherit" 
+              color="inherit"
               noWrap
               sx={{ flexGrow: 1 }}
             >
@@ -136,15 +145,15 @@ function DashboardContent() {
             </Typography>
 
 
-            <IconButton color="inherit"> 
-              <Badge badgeContent={4} color="secondary"> 
+            <IconButton color="inherit">
+              <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-          </Toolbar> 
+          </Toolbar>
           {/* というToolBarが入っている、AppBar */}
-        </AppBar> 
-        
+        </AppBar>
+
         {/*スライドバー*/}
         <Drawer variant="permanent" open={open}>
           <Toolbar // 縦に並んだToolBar
@@ -184,8 +193,8 @@ function DashboardContent() {
             <Grid container spacing={3}>
               {/* Chart */}
               <Grid item xs={12} md={8} lg={9}>
-                
-              あなたへのおすすめ
+
+                あなたへのおすすめ
                 <Paper
                   sx={{
                     p: 2,
@@ -195,18 +204,21 @@ function DashboardContent() {
                     overflow: 'auto'
                   }}
                 >
-    {/*お遊び */}
+                  {/*お遊び */}
 
                   <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
 
-                  <TagSelect name="Apex Legends" imageName='\images\apex-legends-s8-screenshot-50-16x9.jpg.adapt.crop16x9.818p.jpg' linkName='/Rank'/>  
-                  <TagSelect name ="Valorant" imageName='\images\IMAGE_2.jpg' linkName='/Rank'/>  
-                  <TagSelect name = "LoL" imageName='\images\player-guide-map-1440-32575baa2f8d2b2bfd5cfd07e11d1361.png'linkName='/Rank'/>  
+                    <TagSelect name="Apex Legends" imageName='\images\apex-legends-s8-screenshot-50-16x9.jpg.adapt.crop16x9.818p.jpg' linkName='/'/>
+
+
+                    <Link href="/">
+                      Back to Home
+                    </Link>
                   </Box>
 
 
-    
-    {/*お遊び */}                
+
+                  {/*お遊び */}
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
@@ -220,15 +232,48 @@ function DashboardContent() {
                   }}
                 >
                   お気に入り
-                  <Avatar/>
+                  <Avatar />
                 </Paper>
               </Grid>
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                    MatchMaking
+                  MatchMaking
 
 
+                  <FormControl sx={{ m: 1, minWidth: 120 }}>
+                    <InputLabel htmlFor="grouped-native-select">Grouping</InputLabel>
+                    <Select native defaultValue="" id="grouped-native-select" label="Grouping">
+                      <option aria-label="None" value="" />
+                  
+                        <option value={1}>Blonze </option>
+                        <option value={2}>Silver </option>
+                        <option value={3}>Gold </option>
+                        <option value={4}>Platinum </option>
+                        <option value={5}>Diamond </option>
+                        <option value={6}>Master </option>
+                        <option value={7}>Predetor </option>
+       
+
+                    </Select>
+                  </FormControl>
+                  <FormControl sx={{ m: 1, minWidth: 120 }}>
+                    <InputLabel htmlFor="grouped-select">Grouping</InputLabel>
+                    <Select defaultValue="" id="grouped-select" label="Grouping">
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <ListSubheader>Category 1</ListSubheader>
+                      <MenuItem value={1}>Option 1</MenuItem>
+                      <MenuItem value={2}>Option 2</MenuItem>
+                      <ListSubheader>Category 2</ListSubheader>
+                      <MenuItem value={3}>Option 3</MenuItem>
+                      <MenuItem value={4}>Option 4</MenuItem>
+                    </Select>
+                  </FormControl>
+                  <>
+                  
+                  </>
                 </Paper>
               </Grid>
             </Grid>
@@ -241,6 +286,6 @@ function DashboardContent() {
   );
 }
 
-export  default function Dashboard() {
+export default function Dashboard() {
   return <DashboardContent />;
 }
